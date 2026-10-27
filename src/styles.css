@@ -782,3 +782,63 @@ header,
 header * {
   animation: none;
 }
+
+
+
+
+
+/* Animations for Mobile and Tablet */
+
+@media (max-width: 650px) {
+
+  /* Highlight cards */
+  .highlight:hover,
+  .highlight:active {
+    animation: bottomToUp 0.4s ease-out;
+    box-shadow: 0 16px 35px rgba(12, 49, 79, 0.12);
+  }
+
+  /* Benefit cards */
+  .two-col > div:hover,
+  .two-col > div:active {
+    animation: bottomToUp 0.4s ease-out;
+    box-shadow: 0 16px 35px rgba(12, 49, 79, 0.12);
+  }
+
+  /* Intro section */
+  .intro:hover,
+  .intro:active {
+    animation: bottomToUp 0.5s ease-out;
+  }
+
+  /* Testimonial */
+  .blue blockquote:hover,
+  .blue blockquote:active {
+    animation: bottomToUp 0.5s ease-out;
+  }
+
+  /* Features list */
+  .indigo li:hover,
+  .indigo li:active {
+    transform: translateY(-4px);
+    transition: transform 0.3s ease;
+  }
+
+  /* Buttons */
+  .btn:hover,
+  .btn:active {
+    transform: translateY(-5px);
+  }
+}
+
+/* Respect reduced-motion accessibility settings */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
