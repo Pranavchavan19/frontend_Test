@@ -431,12 +431,12 @@ export default function App() {
       <main>
         {error && <p className="wrap err">{error}</p>}
 
-        {/* {!data && !error && (
+        {!data && !error && (
           <p className="wrap">Loading...</p>
-        )} */}
+        )}
 
         
-{!data && !error && (
+{/* {!data && !error && (
   <div className="loading-container" role="status" aria-live="polite">
     <div className="loader"></div>
 
@@ -448,7 +448,7 @@ export default function App() {
       Loading, please wait...
     </span>
   </div>
-)}
+)} */}
 
 
         {data && (
