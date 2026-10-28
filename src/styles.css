@@ -842,3 +842,20 @@ header * {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+@media screen and (max-width: 650px) {
+  body {
+    outline: 5px solid red !important;
+  }
+
+  .mainbar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .highlights,
+  .two-col {
+    grid-template-columns: 1fr !important;
+  }
+}
