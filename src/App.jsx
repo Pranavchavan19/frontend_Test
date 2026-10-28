@@ -431,9 +431,25 @@ export default function App() {
       <main>
         {error && <p className="wrap err">{error}</p>}
 
-        {!data && !error && (
+        {/* {!data && !error && (
           <p className="wrap">Loading...</p>
-        )}
+        )} */}
+
+        
+{!data && !error && (
+  <div className="loading-container" role="status" aria-live="polite">
+    <div className="loader"></div>
+
+    <h2>Please Wait...</h2>
+
+    <p>We're preparing everything for you.</p>
+
+    <span className="loading-text">
+      Loading, please wait...
+    </span>
+  </div>
+)}
+
 
         {data && (
           <>
