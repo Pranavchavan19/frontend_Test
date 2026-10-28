@@ -428,28 +428,12 @@ export default function App() {
     <>
       <Header />
 
-      <main>
+      {/* <main>
         {error && <p className="wrap err">{error}</p>}
 
         {!data && !error && (
           <p className="wrap">Loading...</p>
         )}
-
-        
-{/* {!data && !error && (
-  <div className="loading-container" role="status" aria-live="polite">
-    <div className="loader"></div>
-
-    <h2>Please Wait...</h2>
-
-    <p>We're preparing everything for you.</p>
-
-    <span className="loading-text">
-      Loading, please wait...
-    </span>
-  </div>
-)} */}
-
 
         {data && (
           <>
@@ -557,7 +541,170 @@ export default function App() {
             </section>
           </>
         )}
-      </main>
+      </main> */}
+
+
+<main>
+  {error && <p className="wrap err">{error}</p>}
+
+  {/* 1. Hero Section */}
+  <section
+    className="hero"
+    style={{
+      backgroundImage: `url(${data?.heroImage || ""})`,
+    }}
+  >
+    <div className="hero-box">
+      <h1>{data?.title || "Humipak"}</h1>
+      <p>
+        {data?.tagline || "Advanced Packaging Solutions"}
+      </p>
+    </div>
+  </section>
+
+  {/* 2. Intro Section */}
+  <section className="grey">
+    <div className="wrap intro">
+      {(data?.intro || [
+        "Humipak provides reliable packaging solutions.",
+        "Designed for healthcare and medical instrument packaging."
+      ]).map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
+      ))}
+
+      <p>
+        <strong>
+          {data?.robotNote || "Reliable packaging solutions for healthcare."}
+        </strong>
+      </p>
+    </div>
+  </section>
+
+  {/* 3. Testimonial Section */}
+  <section className="blue">
+    <blockquote className="wrap">
+      <p>
+        “{data?.testimonial?.quote ||
+          "Reliable and effective packaging solutions."}”
+      </p>
+
+      <footer>
+        <strong>
+          {data?.testimonial?.name || "Humipak"}
+        </strong>
+        {" / "}
+        {data?.testimonial?.role || "Healthcare Packaging"}
+      </footer>
+    </blockquote>
+  </section>
+
+  {/* 4. Highlights Section */}
+  <section>
+    <div className="wrap highlights">
+      {(data?.highlights || [
+        {
+          title: "Quality",
+          text: "Quality-focused packaging solutions.",
+          icon: ""
+        },
+        {
+          title: "Safety",
+          text: "Designed for safe instrument handling.",
+          icon: ""
+        }
+      ]).map((highlight, index) => (
+        <div
+          key={highlight.title || index}
+          className="highlight"
+        >
+          {highlight.icon && (
+            <img
+              src={highlight.icon}
+              alt=""
+              width="105"
+              height="105"
+              loading="lazy"
+            />
+          )}
+
+          <h5>{highlight.title}</h5>
+          <p>{highlight.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* 5. Benefits Section */}
+  <section className="grey2">
+    <div className="wrap">
+      <h2>Benefits of using Humipak</h2>
+
+      <div className="two-col">
+        {data?.hospital ? (
+          <BenefitList group={data.hospital} />
+        ) : (
+          <div>
+            <h3>Hospital Benefits</h3>
+            <p>Reliable packaging and safe handling.</p>
+          </div>
+        )}
+
+        {data?.cssd ? (
+          <BenefitList group={data.cssd} />
+        ) : (
+          <div>
+            <h3>CSSD Benefits</h3>
+            <p>Supports efficient instrument processing.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  {/* 6. Features Section */}
+  <section className="indigo">
+    <div className="wrap">
+      <h2>Humipak features</h2>
+
+      <ul>
+        {(data?.features || [
+          "Reliable packaging solutions",
+          "Easy handling",
+          "Quality-focused design"
+        ]).map((feature, index) => (
+          <li key={index}>{feature}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* 7. CTA Section */}
+  <section
+    className="cta"
+    style={{
+      backgroundImage: `url(${data?.heroImage || ""})`,
+    }}
+  >
+    <div className="wrap">
+      <button
+        type="button"
+        className="btn big"
+        onClick={() => setShowForm(true)}
+      >
+        Order Samples Now
+      </button>
+
+      <button
+        type="button"
+        className="btn big"
+        onClick={() => setShowInfo(true)}
+      >
+        Further Information
+      </button>
+    </div>
+  </section>
+</main>
+
 
       <Footer />
 
