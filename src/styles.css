@@ -786,76 +786,69 @@ header * {
 
 
 
-
-/* Animations for Mobile and Tablet */
-
-@media (max-width: 650px) {
-
-  /* Highlight cards */
-  .highlight:hover,
-  .highlight:active {
-    animation: bottomToUp 0.4s ease-out;
-    box-shadow: 0 16px 35px rgba(12, 49, 79, 0.12);
+/* FORCE RESPONSIVE MOBILE LAYOUT */
+@media screen and (max-width: 450px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    overflow-x: hidden;
   }
 
-  /* Benefit cards */
-  .two-col > div:hover,
-  .two-col > div:active {
-    animation: bottomToUp 0.4s ease-out;
-    box-shadow: 0 16px 35px rgba(12, 49, 79, 0.12);
+  * {
+    box-sizing: border-box;
   }
 
-  /* Intro section */
-  .intro:hover,
-  .intro:active {
-    animation: bottomToUp 0.5s ease-out;
-  }
-
-  /* Testimonial */
-  .blue blockquote:hover,
-  .blue blockquote:active {
-    animation: bottomToUp 0.5s ease-out;
-  }
-
-  /* Features list */
-  .indigo li:hover,
-  .indigo li:active {
-    transform: translateY(-4px);
-    transition: transform 0.3s ease;
-  }
-
-  /* Buttons */
-  .btn:hover,
-  .btn:active {
-    transform: translateY(-5px);
-  }
-}
-
-/* Respect reduced-motion accessibility settings */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-
-@media screen and (max-width: 650px) {
-  body {
-    outline: 5px solid red !important;
+  .wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 
   .mainbar {
+    display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  .mainbar nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .hero {
+    width: 100% !important;
+    padding: 32px 16px !important;
   }
 
   .highlights,
   .two-col {
-    grid-template-columns: 1fr !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+  }
+
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(28px, 8vw, 40px) !important;
+    overflow-wrap: anywhere;
+  }
+
+  p,
+  a,
+  button {
+    overflow-wrap: anywhere;
   }
 }
