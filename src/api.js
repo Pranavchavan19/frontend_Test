@@ -113,3 +113,32 @@ export async function submitSampleRequest(data) {
 
   return res.json();
 }
+
+
+// const API_BASE_URL = "https://backend-test-1-sbca.onrender.com";
+
+// export async function fetchContent() {
+//   const response = await fetch(`${API_BASE_URL}/api/humipak`);
+
+//   if (!response.ok) {
+//     throw new Error(`Failed to load content (${response.status})`);
+//   }
+
+//   return response.json();
+// }
+
+// export async function submitSampleRequest(data) {
+//   const response = await fetch(`${API_BASE_URL}/api/sample-requests`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(data),
+//   });
+
+//   if (!response.ok) {
+//     throw new Error(`Request failed (${response.status})`);
+//   }
+
+//   return response.json();
+// }
