@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { X, Send } from "lucide-react";
 import { submitSampleRequest } from "../api";
@@ -6,7 +7,7 @@ export default function SampleForm({ onClose }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    company: "",
+    organisation: "",
     phone: "",
     message: "",
   });
@@ -16,30 +17,46 @@ export default function SampleForm({ onClose }) {
   const [error, setError] = useState("");
 
   const handleChange = (event) => {
-    setForm({
-      ...form,
-      [event.target.name]: event.target.value,
-    });
+    const { name, value } = event.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     setLoading(true);
     setError("");
     setSuccess("");
 
     try {
-      await submitSampleRequest(form);
-      setSuccess("Thank you! Your request has been submitted.");
+      // Send organisation instead of company
+      const response = await submitSampleRequest(form);
+
+      setSuccess(
+        `Thank you! Your request has been submitted.${
+          response?.reference
+            ? ` Reference: ${response.reference}`
+            : ""
+        }`
+      );
+
       setForm({
         name: "",
         email: "",
-        company: "",
+        organisation: "",
         phone: "",
         message: "",
       });
     } catch (err) {
-      setError(err.message || "Unable to submit your request.");
+      console.error("Sample request error:", err);
+
+      setError(
+        err.message || "Unable to submit your request. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -47,24 +64,38 @@ export default function SampleForm({ onClose }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Close">
+      <div
+        className="modal-card"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          className="modal-close"
+          onClick={onClose}
+          aria-label="Close"
+        >
           <X />
         </button>
 
         <span className="eyebrow">GET IN TOUCH</span>
+
         <h2>Request a Sample</h2>
-        <p>Tell us about your requirements and our team will contact you.</p>
+
+        <p>
+          Tell us about your requirements and our team will contact you.
+        </p>
 
         <form onSubmit={handleSubmit} className="sample-form">
           <div className="form-row">
             <input
               name="name"
+              type="text"
               placeholder="Full Name *"
               value={form.name}
               onChange={handleChange}
               required
             />
+
             <input
               name="email"
               type="email"
@@ -77,13 +108,16 @@ export default function SampleForm({ onClose }) {
 
           <div className="form-row">
             <input
-              name="company"
+              name="organisation"
+              type="text"
               placeholder="Company"
-              value={form.company}
+              value={form.organisation}
               onChange={handleChange}
             />
+
             <input
               name="phone"
+              type="tel"
               placeholder="Phone Number"
               value={form.phone}
               onChange={handleChange}
@@ -95,13 +129,26 @@ export default function SampleForm({ onClose }) {
             placeholder="Tell us about your requirements"
             value={form.message}
             onChange={handleChange}
-            rows="4"
+            rows={4}
           />
 
-          {success && <p className="success-message">{success}</p>}
-          {error && <p className="error-message">{error}</p>}
+          {success && (
+            <p className="success-message">
+              {success}
+            </p>
+          )}
 
-          <button className="primary-btn" type="submit" disabled={loading}>
+          {error && (
+            <p className="error-message">
+              {error}
+            </p>
+          )}
+
+          <button
+            className="primary-btn"
+            type="submit"
+            disabled={loading}
+          >
             {loading ? "Submitting..." : "Submit Request"}
             <Send size={16} />
           </button>
