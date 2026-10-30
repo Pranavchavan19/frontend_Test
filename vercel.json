@@ -4,6 +4,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://backend-test-1-sbca.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
